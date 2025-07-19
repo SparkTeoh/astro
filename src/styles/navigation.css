@@ -36,9 +36,13 @@
   @apply before:border-border-default/35 backdrop-blur-sm before:border-b;
 }
 
-.header-dark,
+.header-dark{
+  @apply before:bg-theme-light before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full;
+  @apply after:from-theme-dark after:via-theme-dark/90 after:absolute after:inset-0 after:-z-10 after:h-full after:w-full after:bg-gradient-to-r after:from-0% after:via-35% after:to-transparent;
+}
+
 .banner {
-  @apply before:bg-theme-dark before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full before:opacity-35;
+  @apply before:bg-theme-light before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full before:opacity-35;
   @apply after:from-theme-dark after:via-theme-dark/90 after:absolute after:inset-0 after:-z-10 after:h-full after:w-full after:bg-gradient-to-r after:from-0% after:via-35% after:to-transparent;
 }
 

@@ -38,8 +38,8 @@
 
 .header-dark,
 .banner {
-  @apply before:bg-white before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full before:opacity-100;
-  @apply after:from-white after:via-white/90 after:absolute after:inset-0 after:-z-10 after:h-full after:w-full after:bg-gradient-to-r after:from-0% after:via-35% after:to-transparent;
+  @apply before:bg-theme-dark before:absolute before:inset-0 before:-z-[09] before:h-full before:w-full before:opacity-35;
+  @apply after:from-theme-dark after:via-theme-dark/90 after:absolute after:inset-0 after:-z-10 after:h-full after:w-full after:bg-gradient-to-r after:from-0% after:via-35% after:to-transparent;
 }
 
 /* Language Switcher */
@@ -68,7 +68,7 @@
 }
 
 .header-dark .language-switcher {
-  @apply text-neutral-800;
+  @apply text-white;
 }
 
 /* Navbar */
@@ -173,9 +173,9 @@
   .navbar {
     .nav-item {
       > .nav-link {
-        @apply lg:text-neutral-800;
+        @apply lg:text-white;
 
-        @apply lg:hover:bg-primary/5;
+        @apply lg:hover:bg-white/5;
       }
     }
   }
@@ -312,9 +312,9 @@
 }
 
 .header-dark .nav-toggle-btn {
-  @apply border-neutral-800/35 bg-white text-neutral-800;
+  @apply border-white/35 bg-transparent text-white;
 
   &:hover {
-    @apply border-primary text-primary;
+    @apply border-white text-white;
   }
 }

@@ -1,0 +1,13 @@
+---
+import Base from "@/layouts/Base.astro";
+import { generatePaths } from "@/lib/utils/languageParser.ts";
+import CaseStudyListPage from "@/components/CaseStudyListPage.astro";
+
+export function getStaticPaths() {
+  return generatePaths();
+}
+---
+
+<Base title="Case Studies" fitToScreen={false}>
+  <CaseStudyListPage currentPage={1} />
+</Base> 

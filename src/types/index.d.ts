@@ -374,6 +374,30 @@ export type PostListItem = {
   id: number;
 };
 
+export type CaseStudy = {
+  title: string;
+  publishedAt: string;
+  coverImage?: { url?: string };
+  categories?: { name: string }[];
+  excerpt?: string;
+  content?: array;
+  slug: string;
+  id: number;
+  author?: { name: string; avatar?: { url?: string }, role: string };
+};
+
+export type CaseStudyListItem = {
+  data: {
+    title: string;
+    date: string;
+    image: string | null;
+    categories: string[];
+    content: string;
+    author: string;
+  };
+  slug: string;
+  id: number;
+};
 
 export type StrapiPaginationMeta = {
   pagination: {

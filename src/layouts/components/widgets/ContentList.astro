@@ -4,9 +4,11 @@ import type { ContentListType } from "@/types";
 import parseTomlToJson from "@/lib/utils/parseTomlToJson";
 import BlogCard from "@/components/cards/BlogCard.astro";
 import PortfolioCard from "@/components/cards/PortfolioCard.astro";
+import CaseStudyCard from "@/components/cards/CaseStudyCard.astro";
 import { recursiveCloneObject } from "@/lib/utils/objectFunctions";
 import Pagination from "@/components/widgets/Pagination.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
+import Slug from "@/pages/[...lang]/case-studies/page/slug.astro";
 
 const config = parseTomlToJson("./src/config/config.toml");
 
@@ -36,7 +38,7 @@ let totalPages = 1;
 
 if (content === "portfolio") {
   list = await getCollectionCTM(config.settings.portfolio_folder, Astro.currentLocale);
-} else if (content === "blog") {
+} else if (content === "blog" || content === "case-study") {
   list = items;
   totalPages = pagination?.totalPages ?? 1;
 }
@@ -46,6 +48,8 @@ if (filter?.category) {
 }
 
 list = sortByDate(list);
+console.log(content)
+
 ---
 
 {list && list.length > 0 ? (
@@ -72,7 +76,7 @@ list = sortByDate(list);
       {...rest}
     >
       {list.map((item) =>
-        content === "blog" ? (
+        content === "blog" ? (      
           <BlogCard
             class:list={[
               {
@@ -83,7 +87,7 @@ list = sortByDate(list);
             content={{ ...item.data, ...item, slug: item.slug }}
             options={recursiveCloneObject(options)}
           />
-        ) : content === "portfolio" ? (
+        ) : content === "portfolio" ? (    
           <PortfolioCard
             class:list={[
               {
@@ -93,8 +97,19 @@ list = sortByDate(list);
               },
             ]}
             content={{ ...item.data, slug: item.slug, ...item }}
+            options={recursiveCloneObject(options)}           
+          />          
+        ) : content === "case-study" ? (     
+          <CaseStudyCard
+            class:list={[
+              {
+                "mb-6": gap === "gap-6" && layout === "masonry",
+                "mb-8": gap === "gap-8" && layout === "masonry",
+              },
+            ]}
+            content={{ ...item.data, ...item, slug: item.slug }}
             options={recursiveCloneObject(options)}
-          />
+          />         
         ) : null
       )}
     </div>

@@ -1,0 +1,27 @@
+---
+import Base from "@/layouts/Base.astro";
+import fetchApi from "@/lib/utils/fetchApi";
+import parseTomlToJson from "@/lib/utils/parseTomlToJson";
+import BlogListPage from "@/components/BlogListPage.astro";
+import type { Post } from "@/types";
+
+export async function getStaticPaths() {
+  const config = parseTomlToJson("./src/config/config.toml");
+  const posts = await fetchApi<Post[]>({ endpoint: "posts", wrappedByKey: "data" });
+  const paginationSize = config.settings.pagination || 6;
+  const totalPages = Math.ceil(posts.length / paginationSize);
+  const paths = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paths.push({ params: { slug: i.toString() } });
+  }
+  return paths;
+}
+
+const { slug } = Astro.params;
+const currentPage = slug && !isNaN(Number(slug)) ? Number(slug) : 1;
+
+---
+
+<Base title="Blog"fitToScreen={false}>
+  <BlogListPage currentPage={currentPage} />
+</Base>

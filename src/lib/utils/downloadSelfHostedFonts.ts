@@ -136,6 +136,7 @@ async function generateFonts(fontCollection: Config[]): Promise<Config[]> {
                 "User-Agent":
                   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
               },
+              signal: AbortSignal.timeout(10000) // 10 second timeout
             });
 
             if (res.ok) {
@@ -147,14 +148,15 @@ async function generateFonts(fontCollection: Config[]): Promise<Config[]> {
               );
             }
           } catch (error) {
-            console.error(
-              `[font] ▶ Error fetching Google Fonts URL: ${config.googleFontsURL}`,
-              error,
+            console.warn(
+              `[font] ▶ Error fetching Google Fonts URL: ${config.googleFontsURL}, using cached fonts if available`,
             );
           }
         }
       }),
     );
+  } else {
+    console.log("[font] ▶ Offline mode: using existing font files");
   }
 
   // Compare existing font data and update if necessary
@@ -272,9 +274,13 @@ function parseGoogleCSS(tmp: string) {
 
 async function checkInternetConnection(): Promise<boolean> {
   try {
-    const response = await fetch("https://www.google.com", { method: "HEAD" });
+    const response = await fetch("https://www.google.com", { 
+      method: "HEAD",
+      signal: AbortSignal.timeout(5000) // 5 second timeout
+    });
     return response.ok;
   } catch {
+    console.warn("[font] ▶ Internet connection unavailable, using cached fonts");
     return false;
   }
 }

@@ -1,0 +1,49 @@
+[
+  {
+    "name": "DM Sans",
+    "src": [
+      {
+        "path": "./__astro_font_generated__/o-0bIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjc5a7du3mhPy0.woff2",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "path": "./__astro_font_generated__/o-0bIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjc5aPdu3mhPy1Fig.woff2",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "path": "./__astro_font_generated__/o-0bIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjc5ardu3mhPy1Fig.woff2",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "path": "./__astro_font_generated__/o-0bIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjc5aHdu3mhPy1Fig.woff2",
+        "style": "normal",
+        "weight": "700"
+      }
+    ],
+    "preload": false,
+    "provider": "google-fonts",
+    "display": "swap",
+    "cssVariable": "font-primary",
+    "fallback": "sans-serif",
+    "locallyHosted": true
+  },
+  {
+    "name": "Syne",
+    "src": [
+      {
+        "path": "./__astro_font_generated__/rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K6z9mXg.woff2",
+        "style": "normal",
+        "weight": "700"
+      }
+    ],
+    "preload": false,
+    "display": "swap",
+    "cssVariable": "font-secondary",
+    "provider": "google-fonts",
+    "fallback": "sans-serif",
+    "locallyHosted": true
+  }
+]

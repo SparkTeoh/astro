@@ -399,16 +399,4 @@ export type CaseStudyListItem = {
   id: number;
 };
 
-export type StrapiPaginationMeta = {
-  pagination: {
-    page: number;
-    pageSize: number;
-    pageCount: number;
-    total: number;
-  };
-}
 
-export type StrapiResponse<T> ={
-  data: T;
-  meta?: StrapiPaginationMeta;
-}

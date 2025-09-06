@@ -1,19 +1,19 @@
 ---
-import ReactIcon from "@/helpers/ReactIcons.astro";
-import { useTranslations } from "@/lib/utils/languageParser.ts";
-import fetchApi from "@/lib/utils/fetchApi";
-import type { StrapiResponse, Category } from "@/types";
+// DISABLED: This component uses Strapi API which has been removed
+// TODO: Convert to use local Markdown files for categories
 
 interface Props {
   class?: string;
 }
 
-const { data } = await fetchApi<StrapiResponse<Category[]>>({
-  endpoint: "categories",
-  query: { "populate": "posts" },
-});
+// Mock data for now
+let categories = [];
+---
 
-let categories = data.map((category) => ({
+<!-- DISABLED: Categories functionality -->
+<div class="{Astro.props.class}">
+  <p>Categories functionality disabled. TODO: Implement local MD file support.</p>
+</div>
   name: category.name,
   slug: `/blog/category/${category.slug}/`,
   count: category.posts?.length || 0,

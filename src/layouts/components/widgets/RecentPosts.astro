@@ -1,20 +1,22 @@
 ---
+// DISABLED: This component uses Strapi API which has been removed
+// TODO: Convert to use local Markdown files for recent posts
+
 import BlogCard from "../cards/BlogCard.astro";
 import { useTranslations } from "@/lib/utils/languageParser";
-import fetchApi from "@/lib/utils/fetchApi";
-import resolveImageUrl from "@/lib/utils/resolveImageUrl";
-import type { Post, StrapiResponse } from "@/types";
 
 interface Props {
   class?: string;
 }
 
-const { data } = await fetchApi<StrapiResponse<Post[]>>({
-  endpoint: "posts",
-  query: {
-    "populate[coverImage][populate]": true,
-    "populate": "categories",
-    "sort": "publishedAt:desc",
+// Mock data for now
+const data = [];
+---
+
+<!-- DISABLED: Recent posts functionality -->
+<div class="{Astro.props.class}">
+  <p>Recent posts functionality disabled. TODO: Implement local MD file support.</p>
+</div>
   },
 });
 

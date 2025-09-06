@@ -47,6 +47,19 @@ export default defineConfig({
       prefixDefaultLocale: show_default_lang_in_url,
     },
   },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: 268402689 // ~16K x 16K limit
+      }
+    },
+    domains: ['localhost'],
+    remotePatterns: [{
+      protocol: 'http',
+      hostname: 'localhost',
+    }]
+  },
   integrations: [
     react(),
     sitemapConfig.enable ? sitemap() : null,

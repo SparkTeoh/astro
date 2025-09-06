@@ -1,6 +1,6 @@
 ---
 import parseTomlToJson from "./utils/parseTomlToJson";
-import languages from "@/config/language.json";
+import languages from "@/config/language.json" with { type: "json" };
 import {
   getCollection,
   type CollectionEntry,

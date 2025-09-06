@@ -4,13 +4,6 @@ about:
   enable: true
   content: |
     Notre équipe de consultants expérimentés fournit des idées pratiques et des stratégies innovantes pour aider votre entreprise à prospérer dans un environnement concurrentiel.
-  video:
-    src: "bTqVqk7FSmY" # Chemin de la vidéo hébergée localement (ex. : /videos/test-video.mp4), ou identifiant de vidéo YouTube/Vimeo (ex. : identifiant YouTube - LXb3EKWsInQ, identifiant Vimeo - 1003013057)
-    type: "" # Si la vidéo est stockée localement dans `public/videos`, définissez le type de fichier vidéo (ex. : "video/mp4")
-    provider: "youtube" # Options : "youtube", "vimeo", ou "html5"
-    poster: "/images/video-thumbnail.jpg" # Chemin de l'image miniature pour la vidéo
-    autoplay: true # Mettre sur true pour lecture automatique ; false pour démarrage manuel (par défaut : false)
-    id: "banner-video"
 slider:
   - enable: true
     title: "Solutions innovantes pour un succès durable"

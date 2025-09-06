@@ -32,11 +32,4 @@ banner:
   image:
     src: "/images/about-us-banner.jpg"
     alt: "Example Alt Text"
-  video:
-    src: "CHSnz0bCaUk" # Video path in 'public/videos' folder, or a YouTube/Vimeo video ID
-    type: "" # If video is stored locally in `public/videos`, set to video file type (e.g., "video/mp4")
-    provider: "youtube" # Options: "youtube", "vimeo", or "html5"
-    poster: "" # Path to thumbnail image for the video
-    autoplay: true # Set to true to autoplay; false for manual start (default: false)
-    id: "about-us-video"
 ---

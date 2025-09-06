@@ -31,10 +31,11 @@ const bgOptimizedImage = async (
   // Get the image data for the specified source path
   const image = await getImagePath(src);
 
-  // Optimize the image for development
+  // Optimize the image with better defaults
   const OptimizedImage = await getImage({
     src: image.default,
-    format: format,
+    format: format || "webp", // Default to WebP for better compression
+    quality: 85, // Add quality setting for better performance
   });
 
   return OptimizedImage.src;

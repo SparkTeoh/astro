@@ -1,10 +1,13 @@
 /* AOS Animations */
 /* --------------------------------- */
+/* Performance optimizations for animations */
 [data-aos] {
   opacity: 1;
   transform: translateY(0);
   transition: none;
-  will-change: transform;
+  will-change: transform, opacity; /* Hint browser for GPU acceleration */
+  transform-style: preserve-3d; /* Enable hardware acceleration */
+  backface-visibility: hidden; /* Prevent flicker */
 }
 
 [data-aos="fade-up-sm"] {

@@ -14,7 +14,11 @@
     "remove-multilingual": "node ./scripts/remove-multilingual.mjs",
     "remove-draft-from-sitemap": "node ./scripts/remove-draft-from-sitemap.mjs",
     "format": "prettier -w ./src",
-    "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch"
+    "test": "cross-env TS_NODE_PROJECT=\"./tsconfig.jest.json\" jest --watch",
+    "compress-images": "node scripts/compress-large-images.mjs",
+    "generate-webp": "node scripts/generate-webp.mjs",
+    "fix-orientation": "node scripts/fix-image-orientation.mjs",
+    "optimize-images": "yarn compress-images && yarn fix-orientation && yarn generate-webp"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

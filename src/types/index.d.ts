@@ -303,7 +303,6 @@ type BannerImage = {
 type Banner = {
   enable: boolean;
   image: BannerImage;
-  video: VideoConfig;
 };
 
 // END ABOUT US SECTION

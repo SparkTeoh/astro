@@ -1,12 +1,10 @@
 ---
 import { getEntryCTM } from "@/lib/contentParser.astro";
-import VideoModal from "@/components/widgets/VideoModal.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import type { Achievements, Banner, Section } from "@/types";
 import AnimatedNumber from "@/layouts/components/widgets/AnimatedNumber.astro";
-import ReactIcon from "@/helpers/ReactIcons.astro";
 import BtnText from "../buttons/BtnText.astro";
 import { getLocaleUrlCTM } from "@/lib/utils/languageParser.ts";
 
@@ -92,22 +90,6 @@ let {
             data-aos="fade-up-sm"
             data-aos-delay="300"
             class="flex items-center justify-center">
-            <button
-              type="button"
-              title="Play Video"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls={"#" + banner.video.id}
-              data-hs-overlay={"#" + banner.video.id}
-              data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
-              class="video-modal-toggle has-animated-waves absolute flex h-20 w-20 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 lg:h-20 lg:w-20">
-              <div class="icon relative z-10 flex h-20 w-20 items-center justify-center rounded-full">
-                <ReactIcon
-                  icon="IoPlaySharp"
-                  class="ml-2 h-6 w-6 lg:h-8 lg:w-8"
-                />
-              </div>
-            </button>
             <OptimizedImage
               height={500}
               src={banner.image.src}
@@ -117,7 +99,6 @@ let {
           </div>
         )}
       </div>
-      <VideoModal video={banner.video} />
     </section>
   )
 }

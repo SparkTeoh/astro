@@ -107,8 +107,20 @@ export class stickySidebar {
   }
 
   attachListeners() {
-    this.checkPositionListener = this.checkPosition.bind(this);
-    window.addEventListener("scroll", this.checkPositionListener);
+    // Add throttling to improve scroll performance
+    let ticking = false;
+    
+    this.checkPositionListener = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          this.checkPosition();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener("scroll", this.checkPositionListener, { passive: true });
   }
 
   destroy() {

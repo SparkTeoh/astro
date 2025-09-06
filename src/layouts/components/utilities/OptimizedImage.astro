@@ -35,9 +35,9 @@ let {
   inlineSvg,
   width,
   height,
-  loading,
-  decoding,
-  formats,
+  loading = "lazy", // Default to lazy loading
+  decoding = "async", // Default to async decoding
+  formats = ["avif", "webp", "jpeg"], // Default to modern formats
   style,
   ...rest
 } = Astro.props;

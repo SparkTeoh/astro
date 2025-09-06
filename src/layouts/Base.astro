@@ -57,17 +57,24 @@ className =
         const AOS = await import("aos");
 
         AOS.init({
-          duration: 700,
+          duration: 500, // Reduced duration for snappier animations
           easing: "ease-out",
-          disable: "mobile",
-          once: true,
+          disable: "mobile", // Keep mobile disabled for performance
+          once: true, // Animate only once for better performance
+          throttleDelay: 99, // Add throttle delay for scroll events
+          debounceDelay: 50, // Add debounce delay for resize events
         });
 
-        // Smooth Scroll - https://github.com/gblazex/smoothscroll-for-websites/wiki
+        // Smooth Scroll - Optimized for better performance
         SmoothScroll({
-          animationTime: 600, // [ms]
-          stepSize: 60, // [px]
+          animationTime: 300, // [ms] - Reduced for snappier feel
+          stepSize: 40, // [px] - Smaller steps for smoother motion
           touchpadSupport: true,
+          pulseAlgorithm: true, // Enable pulse algorithm for better performance
+          pulseScale: 4,
+          pulseNormalize: 1,
+          accelerationDelta: 50,
+          accelerationMax: 3,
         });
 
         // Fix: Support horizontal scrolling by using the mouse wheel + shift (Needed when using smooth scrolling js library - SmoothScroll)

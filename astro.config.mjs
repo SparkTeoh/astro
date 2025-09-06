@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import AutoImport from "astro-auto-import";
 import { defineConfig } from "astro/config";
-import languagesJSON from "./src/config/language.json";
+import languagesJSON from "./src/config/language.json" with { type: "json" };
 import rehypeExternalLinks from "rehype-external-links";
 import remarkParseContent from "./src/lib/utils/remarkParseContent.ts";
 import parseTomlToJson from "./src/lib/utils/parseTomlToJson.ts";

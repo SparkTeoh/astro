@@ -9,7 +9,7 @@ const { sidebar, boxShadow, ...rest } = Astro.props;
 
 const {
   widgets: widgetList = ["Search", "Categories", "RecentPosts", "CtaBlock"],
-} = sidebar;
+} = sidebar || {};
 const widgets = [
   {
     name: "RelatedPortfolios",
@@ -49,14 +49,14 @@ const widgets = [
           boxShadow && "lg:box-shadow-primary",
         ]}>
         {widgets
-          .filter(({ name }) => widgetList.includes(name))
+          .filter(({ name }) => Array.isArray(widgetList) && widgetList.includes(name))
           .map(({ Component, props }) => (
             <Component {...props} />
           ))}
       </div>
     ) : (
       widgets
-        .filter(({ name }) => widgetList.includes(name))
+        .filter(({ name }) => Array.isArray(widgetList) && widgetList.includes(name))
         .map(({ Component, props }) => <Component {...props} />)
     )
   }

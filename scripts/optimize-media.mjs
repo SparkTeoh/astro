@@ -34,7 +34,7 @@ const getAllFiles = (dirPath, arrayOfFiles = []) => {
   return arrayOfFiles;
 };
 
-// Optimize images
+// Optimize images with better compression and WebP generation
 const optimizeImage = async (filePath) => {
   const ext = path.extname(filePath).toLowerCase();
   const buffer = fs.readFileSync(filePath);
@@ -46,15 +46,34 @@ const optimizeImage = async (filePath) => {
       });
       fs.writeFileSync(filePath, optimized);
     } else if ([".png", ".jpg", ".jpeg"].includes(ext)) {
+      // Generate WebP version first
+      const webpPath = filePath.replace(/\.(png|jpe?g)$/i, '.webp');
+      await sharp(filePath)
+        .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 85, effort: 6 })
+        .toFile(webpPath);
+      
+      console.log(`✅ Generated WebP: ${webpPath}`);
+      
+      // Optimize original with better compression
       const optimized = await imagemin.buffer(buffer, {
         plugins: [
-          imageminMozjpeg({ quality: 100 }),
-          imageminPngquant({ quality: [0.9, 1] }),
+          imageminMozjpeg({ quality: 85, progressive: true }), // Reduced from 100 to 85
+          imageminPngquant({ quality: [0.7, 0.85] }), // Reduced from [0.9, 1] to [0.7, 0.85]
         ],
       });
-      fs.writeFileSync(filePath, optimized);
+      
+      // Resize large images
+      const sharpOptimized = await sharp(optimized)
+        .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
+        .toBuffer();
+        
+      fs.writeFileSync(filePath, sharpOptimized);
     } else {
-      const optimized = await sharp(filePath).toBuffer();
+      // For other formats, just resize if too large
+      const optimized = await sharp(filePath)
+        .resize({ width: 1920, height: 1080, fit: 'inside', withoutEnlargement: true })
+        .toBuffer();
       fs.writeFileSync(filePath, optimized);
     }
     console.log(`✅ Optimized image: ${filePath}`);
@@ -86,13 +105,25 @@ const compressVideo = (filePath) => {
 
 // Main function
 const runOptimizer = async () => {
+  console.log('✨ Starting image optimization...');
   const files = getAllFiles(directory);
+  let optimizedCount = 0;
+  
   for (const file of files) {
     const ext = path.extname(file).toLowerCase();
     if (imageExtensions.includes(ext)) {
-      await optimizeImage(file);
+      const stats = fs.statSync(file);
+      const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
+      
+      if (stats.size > 100 * 1024) { // Only optimize files larger than 100KB
+        console.log(`📄 Processing: ${file} (${sizeMB}MB)`);
+        await optimizeImage(file);
+        optimizedCount++;
+      }
     }
   }
+  
+  console.log(`✅ Optimization complete! Processed ${optimizedCount} images.`);
 };
 
 runOptimizer();

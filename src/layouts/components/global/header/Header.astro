@@ -13,7 +13,8 @@ import { filteredEnabled } from "@/lib/utils/filteredEnabled";
 const config = parseTomlToJson("./src/config/config.toml");
 const t = await useTranslations(Astro.currentLocale as string);
 let main = t("main") as NavigationLink[];
-main = filteredEnabled(main);
+// Ensure main is an array before calling filteredEnabled
+main = Array.isArray(main) ? filteredEnabled(main) : [];
 
 // Check if the current page is the home page
 const isDarkHeader =

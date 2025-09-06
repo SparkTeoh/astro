@@ -1,6 +1,11 @@
 import type { NavigationLink } from "@/types";
 
 export function filteredEnabled(menu: NavigationLink[]): NavigationLink[] {
+  // Add safety check for undefined or null menu
+  if (!menu || !Array.isArray(menu)) {
+    return [];
+  }
+  
   return menu
     .filter((item) => item.disable !== true)
     .map((item) => {

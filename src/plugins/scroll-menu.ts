@@ -37,18 +37,17 @@ export class ScrollMenu {
 
   initDefaultOptions() {
     this.options = {
-      duration: 400,
+      duration: 200, // Reduced for better performance
       activeOffset: 40,
       scrollOffset: 10,
-      smoothScroll: true, // Default to smooth scroll
-      autoSetFirstActive: true, // Default to automatically setting the first item active
+      smoothScroll: false, // Disable to use SmoothScroll library instead
+      autoSetFirstActive: true,
       easingFunction: (t, i, e, n) => {
-        return (t /= n / 2) < 1
-          ? (e / 2) * t * t * t + i
-          : (e / 2) * ((t -= 2) * t * t + 2) + i;
+        // Simplified easing function for better performance
+        return e * (t /= n) * t + i;
       },
-      afterActive: undefined, // Default callback is undefined
-      beforeActive: undefined, // Default callback is undefined
+      afterActive: undefined,
+      beforeActive: undefined,
     };
   }
 
@@ -87,9 +86,22 @@ export class ScrollMenu {
   }
 
   bindWindowEvents() {
+    // Use throttle to improve scroll performance
+    let ticking = false;
+    
+    const throttledUpdate = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          this.onWindowUpdate();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     window.addEventListener("load", this.onWindowUpdate.bind(this), false);
-    window.addEventListener("scroll", this.onWindowUpdate.bind(this), false);
-    window.addEventListener("resize", this.onWindowUpdate.bind(this), false);
+    window.addEventListener("scroll", throttledUpdate, { passive: true });
+    window.addEventListener("resize", throttledUpdate, false);
   }
 
   bindMenuItems() {

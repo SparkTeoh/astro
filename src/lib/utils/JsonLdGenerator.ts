@@ -82,7 +82,9 @@ export default function JsonLdGenerator(content: JSONLDProps, Astro: any) {
     "@type": "Organization",
     name: config.seo.author,
     url: trailingSlashChecker(Astro.url.origin),
-    sameAs: social.main.filter((item) => item.enable).map((item) => item.url),
+    sameAs: social.main && Array.isArray(social.main) 
+      ? social.main.filter((item) => item.enable).map((item) => item.url)
+      : [],
     logo: {
       "@type": "ImageObject",
       url: absoluteUrl(config.site.logo, Astro),

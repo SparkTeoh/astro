@@ -29,11 +29,4 @@ banner:
   image:
     src: "/images/about-us-banner.jpg"
     alt: "Exemple de texte alternatif"
-  video:
-    src: "CHSnz0bCaUk" # Chemin de la vidéo dans le dossier 'public/videos', ou ID de vidéo YouTube/Vimeo
-    type: "" # Si la vidéo est stockée localement dans `public/videos`, définissez le type de fichier vidéo (ex. : "video/mp4")
-    provider: "youtube" # Options : "youtube", "vimeo" ou "html5"
-    poster: "" # Chemin vers l'image miniature de la vidéo
-    autoplay: true # Mettre sur true pour lecture automatique ; false pour démarrage manuel (par défaut : false)
-    id: "about-us-video"
 ---

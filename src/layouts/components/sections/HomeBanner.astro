@@ -1,12 +1,10 @@
 ---
 // @ts-nocheck
 import "swiper/css/bundle";
-import VideoModal from "@/components/widgets/VideoModal.astro";
 import overrideObjects from "@/lib/utils/overrideObjects.ts";
 import { markdownify } from "@/lib/utils/textConverter";
-import type { Button, Section, VideoConfig } from "@/types";
+import type { Button, Section } from "@/types";
 import OptimizedImage from "@/components/utilities/OptimizedImage.astro";
-import ReactIcon from "@/helpers/ReactIcons.astro";
 import { getEntryCTM } from "@/lib/contentParser.astro";
 import { getLocaleUrlCTM } from "@/lib/utils/languageParser.ts";
 import AnimatedText from "../widgets/AnimatedText.astro";
@@ -15,7 +13,6 @@ import AnimatedText from "../widgets/AnimatedText.astro";
 type BannerAbout = {
   enable: boolean;
   content: string;
-  video: VideoConfig;
 };
 
 // Type for each item in the slider
@@ -52,12 +49,14 @@ let actual_content = overrideObjects(
 ) as home_banner_section_type;
 
 // Extracting required values from 'content' object
-let { about, slider } = actual_content as home_banner_section_type;
+let { enable = true, about, slider } = actual_content as home_banner_section_type;
 
 // Filter Only enabled slider items
-slider = slider.filter((item) => item.enable);
+slider = slider ? slider.filter((item) => item.enable) : [];
 ---
 
+{
+  enable && (
 <section class="banner before:z-10 after:z-10">
   <div
     class="swiper swiper-banner-image !absolute bottom-0 left-0 -z-10 h-[112%] w-screen max-w-full">
@@ -192,28 +191,15 @@ slider = slider.filter((item) => item.enable);
           data-aos-duration="600"
           class="relative z-30 lg:absolute lg:right-0 lg:bottom-0">
           <div class="flex flex-col gap-8 bg-white/5 p-6 text-white backdrop-blur-sm max-lg:mt-10 lg:max-w-lg lg:p-12">
-            <button
-              type="button"
-              title="Play Video"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls={"#" + about.video.id}
-              data-hs-overlay={"#" + about.video.id}
-              data-hs-overlay-options={`{"emulateScrollbarSpace" : true}`}
-              class="video-modal-toggle bg-theme-dark flex h-16 w-16 items-center justify-center rounded-full pl-2 lg:h-20 lg:w-20">
-              <ReactIcon
-                icon="IoPlaySharp"
-                class="h-6 w-6 text-blue-200 lg:h-8 lg:w-8"
-              />
-            </button>
             <p class="opacity-90" set:html={about.content} />
           </div>
         </div>
       )
     }
   </div>
-  <VideoModal video={about.video} />
 </section>
+  )
+}
 
 <script>
   // @ts-nocheck

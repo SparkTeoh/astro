@@ -1,5 +1,5 @@
 import parseTomlToJson from "./parseTomlToJson";
-import languagesJSON from "../../config/language.json";
+import languagesJSON from "../../config/language.json" with { type: "json" };
 import trailingSlashChecker from "./trailingSlashChecker";
 import path from "node:path";
 
@@ -50,10 +50,14 @@ export const useTranslations = async (lang: string): Promise<Function> => {
     dictionary = await import(`../../../src/i18n/${default_language}.json`);
   }
 
+  // Extract default export from the imported modules
+  const menuData = menu.default || menu;
+  const dictionaryData = dictionary.default || dictionary;
+
   // Combine translations
   const translations = {
-    ...menu,
-    ...dictionary,
+    ...menuData,
+    ...dictionaryData,
     contentDir,
   };
 

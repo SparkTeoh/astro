@@ -4,7 +4,9 @@
 }
 
 html {
-  @apply text-base-xs min-[340px]:text-base-sm scroll-smooth md:text-base;
+  @apply text-base-xs min-[340px]:text-base-sm md:text-base;
+  /* Disable CSS scroll-smooth to prevent conflicts with JS smooth scroll library */
+  /* @apply scroll-smooth; */
   /* For Syne Font Make All Numbers Same Height */
   font-feature-settings:
     "lnum" 1,
@@ -14,6 +16,9 @@ html {
 
 body {
   @apply bg-body font-primary text-text-default leading-normal font-normal;
+  /* Performance optimizations for smooth scrolling */
+  overscroll-behavior: none; /* Prevent scroll chaining and overscroll effects */
+  -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
 }
 
 /* Custom Scrollbar */

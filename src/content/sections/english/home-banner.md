@@ -4,18 +4,10 @@ about:
   enable: true
   content: |
     Our team of seasoned consultants provides actionable insights and innovative strategies to help your business thrive in today's competitive landscape
-
-  video:
-    src: "bTqVqk7FSmY" # Locally hosted video path (ex: /videos/test-video.mp4), or a YouTube/Vimeo video ID (ex: youtube id - LXb3EKWsInQ, vimeo id - 1003013057)
-    type: "" # If video is stored locally in `public/videos`, set to video file type (e.g., "video/mp4")
-    provider: "youtube" # Options: "youtube", "vimeo", or "html5"
-    poster: "/images/video-thumbnail.jpg" # Path to thumbnail image for the video
-    autoplay: true # Set to true to autoplay; false for manual start (default: false)
-    id: "banner-video"
 slider:
   - enable: true
     title: "团队大了，却没人关心利润？"
-    description: "问题不在员工，而在机制。利润预算系统，让团队“自动盯利润”"
+    description: "问题不在员工，而在机制。利润预算系统，让团队'自动盯利润'"
     background_image: "/images/banner/5.jpg"
     button:
       enable: true
@@ -43,8 +35,7 @@ slider:
       url: "/contact"
       rel: ""
       target: ""
----
-slider:
+
   - enable: true
     title: "利润增长停滞？MMC预算管理，助您精准破局"
     description: "当传统方法失效，MMC以利润为导向的预算体系，将成为您企业突破困局、实现跨越式发展的关键。"
@@ -105,3 +96,4 @@ slider:
       url: "/contact"
       rel: ""
       target: ""
+---
